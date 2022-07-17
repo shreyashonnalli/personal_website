@@ -37,23 +37,19 @@ function leaveHoverOverHeaderLinks(event){
 }
 
 function hoverOverBottomLinks(){
+  changeLinkColours(quoteContainer);
   blurBackgroundImage();
   printQuoteOnScreen(event);
 }
 
 function leaveHoverOverBottomLinks(){
+  normalLinkColours(quoteContainer);
   unblurBackgroundImage();
   removeQuoteOnScreen();
 }
 
-function innerContentReadyToPrint(){
-  innerContent.setAttribute('style','text-align: center; font-size: 60px; color: white; filter: none; transition: 2s;');
-}
 
 
-function innerContentReadyToRemove(){
-  innerContent.setAttribute('style','text-align: center; font-size: 60px; color: transparent; text-shadow: 0 0 5px rgba(0,0,0,0);transition: 1s;');
-}
 
 function printQuoteOnScreen(event){
   let quote = quoteToBePrintedOnScreen(event);
@@ -63,6 +59,15 @@ function printQuoteOnScreen(event){
 
 function removeQuoteOnScreen(){
   innerContentReadyToRemove();
+}
+
+function innerContentReadyToPrint(){
+  innerContent.setAttribute('style','text-align: center; font-size: 60px; color: white; filter: none; transition: 2s;');
+}
+
+
+function innerContentReadyToRemove(){
+  innerContent.setAttribute('style','text-align: center; font-size: 60px; color: transparent; text-shadow: 0 0 5px rgba(0,0,0,0);transition: 1s;');
 }
 
 
