@@ -7,18 +7,38 @@ let quoteContainer = document.querySelector('.quote-container');
 let blogLink = document.getElementById('blog-link');
 let innerContent = document.querySelector('.inner-content');
 innerContent.setAttribute('style','font-size: 60px; color: transparent; text-shadow: 0 0 5px rgba(0,0,0,0);');
+let preLoader = document.querySelector('.pre-loader');
+preLoader.setAttribute('style','color: transparent; text-shadow: 0 0 5px rgba(0,0,0,0);');
+//fadeInAwesomeness();
+window.addEventListener('load', loadPage);
 
-
+//mouse hover event listeners for the header links
 projectLink.addEventListener('mouseover', hoverOverHeaderLinks);
 projectLink.addEventListener('mouseleave', leaveHoverOverHeaderLinks);
 blogLink.addEventListener('mouseover',hoverOverHeaderLinks);
 blogLink.addEventListener('mouseleave',leaveHoverOverHeaderLinks);
 
+//mouse hover event listeners for bottom links
 aboutMeLink.addEventListener('mouseover',hoverOverBottomLinks);
 aboutMeLink.addEventListener('mouseleave',leaveHoverOverBottomLinks);
 extrasLink.addEventListener('mouseover',hoverOverBottomLinks);
 extrasLink.addEventListener('mouseleave',leaveHoverOverBottomLinks);
 
+
+function loadPage(){
+  fadeInAwesomeness();
+  setTimeout(function(){fadeOutPreLoader();},1000);
+}
+
+
+function fadeOutPreLoader(){
+  preLoader.className += " hidden";
+}
+
+
+function fadeInAwesomeness(){
+  preLoader.setAttribute('style','text-align: center; color: black; filter: none; transition: 1s;');
+}
 
 function hoverOverHeaderLinks(event){
   changeLinkColours(aboutMeLink);
