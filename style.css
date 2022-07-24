@@ -1,9 +1,5 @@
    /*    * { border: 1px solid red; }   */
 
-
-
-
-
 body, html{
   font-family: Helvetica Neue,Helvetica,Arial;
   color: white;
@@ -14,6 +10,7 @@ body, html{
   width: 100%;
   flex-direction: column;
   margin: 0;
+  overflow: hidden;
 }
 
 .background-image{
@@ -39,7 +36,7 @@ body, html{
   position: sticky;
 }
 
-.project-link-header-container{
+.project-button-header-container{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -90,12 +87,14 @@ font-size: 32px;
 }
 
 button{
-  width: 100px;
-  height: 35px;
-  font-size: 16px;
   background-color: transparent;
   color: white;
   border-style: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 16px;
   font-weight: 300;
 }
 
@@ -111,8 +110,22 @@ a{
 }
 
 
-.project-link, .blog-link{
+.project-button, .blog-link{
   padding-right: 20px;
+}
+
+.hide{
+  color:transparent;
+  transition: 1s;
+  cursor: default;
+  pointer-events: none;
+}
+
+.unhide{
+  color: white;
+  transition: 1s;
+  cursor: auto;
+  pointer-events: all;
 }
 
 .pre-loader{
@@ -132,4 +145,126 @@ a{
 .pre-loader.hidden {
   opacity: 0;
   pointer-events: none;
+}
+
+
+
+
+.blurred-image{
+  filter: blur(16px);
+  transition: 1s;
+}
+
+.clear-image{
+  filter: none;
+  transition: 1s;
+}
+
+
+.inner-content{
+  text-align: center;
+  font-size: 60px;
+  filter: none;
+  color: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.animate-fade-out, .animate-fade-out *{
+  cursor: default;
+  pointer-events: none;
+  color: white;
+  animation-duration: 0.5s;
+  animation-name: fade-out-text;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+
+.animate-fade-in, .animate-fade-in *{
+  cursor: default;
+  pointer-events: auto;
+  color: transparent;
+  animation-duration: 1s;
+  animation-name: fade-in-text;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-out-text{
+  from{
+    color:white;
+  }
+  to{
+    color: transparent;
+  }
+}
+
+@keyframes fade-in-text {
+  from{
+    color: transparent;
+  }
+  to{
+    color: white;
+  }
+}
+
+.animate-fade-in-links, .animate-fade-in-links *{
+  transform: translateX(-100px);
+  text-align: center;
+  cursor: auto;
+  pointer-events: all;
+  color: transparent;
+  animation-duration: 1s;
+  animation-name: fade-in-links;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-in-links{
+  0%{
+    transform: translateX(-10px);
+    color: transparent;
+  }
+  75%{
+    /*     color: transparent;    */
+
+  }
+  100%{
+    transform: translateX(0);
+    color: white;
+  }
+}
+
+.animate-fade-out-links, .animate-fade-out-links *{
+  text-align: center;
+  cursor: default;
+  pointer-events: none;
+  color: white;
+  animation-duration: 0.5s;
+  animation-name: fade-out-links;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fade-out-links {
+  0%{
+    transform: translateX(0);
+    color: white;
+  }
+  75%{
+    /*     color: transparent;    */
+
+  }
+  100%{
+    transform: translateX(-10px);
+    color: transparent;
+  }
+}
+
+.hidden-inner-content{
+  cursor: default;
+  pointer-events: none;
+  color: transparent;
+  filter: none;
 }
