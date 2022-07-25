@@ -20,9 +20,18 @@ routeFindingProject.appendChild(routeFindingProjectLink);
 let leedSkrrt = document.createElement('li');
 let leedSkrrtLink = document.createElement('a');
 leedSkrrtLink.href = "index.html";
-leedSkrrtLink.innerHTML="leedSkrrt"
+leedSkrrtLink.innerHTML="leedSkrrt";
 leedSkrrt.appendChild(leedSkrrtLink);
 appendProjectListChildren();
+let blogList = document.createElement('ul');
+blogList.setAttribute('style','list-style: none;');
+let launchDay = document.createElement('li');
+let launchDayLink = document.createElement('a');
+launchDayLink.href = "index.html";
+launchDayLink.innerHTML = "Launch Day!";
+launchDay.appendChild(launchDayLink);
+appendBlogListChildren();
+let resumeButton = document.getElementById('resume-button');
 let justReturnedFromClick = false;
 /*
 <a href="#" id="leedskrrt">leedskrrt</a>
@@ -36,6 +45,8 @@ projectButton.addEventListener('click', toggleLinks);
 blogLink.addEventListener('mouseover',hoverOverHeaderLinks);
 blogLink.addEventListener('mouseleave',leaveHoverOverHeaderLinks);
 blogLink.addEventListener('click',toggleLinks);
+resumeButton.addEventListener('mouseover', hoverOverHeaderLinks);
+resumeButton.addEventListener('mouseleave', leaveHoverOverHeaderLinks);
 
 //mouse hover event listeners for bottom links
 aboutMeLink.addEventListener('mouseover',hoverOverBottomLinks);
@@ -44,7 +55,9 @@ extrasLink.addEventListener('mouseover',hoverOverBottomLinks);
 extrasLink.addEventListener('mouseleave',leaveHoverOverBottomLinks);
 
 
-
+function appendBlogListChildren(){
+  blogList.appendChild(launchDay);
+}
 
 function appendProjectListChildren(){
   projectList.appendChild(routeFindingProject);
@@ -59,8 +72,8 @@ function displayBlogLinks(){
 
 
 function toggleLinks(event){
-  if(backgroundImage.classList.contains('project-links-displayed')){
-    backgroundImage.classList.remove('project-links-displayed');
+  if(backgroundImage.classList.contains('links-displayed')){
+    backgroundImage.classList.remove('links-displayed');
     unblurBackgroundImage();
     normalLinkColours(quoteContainer);
     innerContentLinksReadyToRemove();
@@ -74,16 +87,30 @@ function toggleLinks(event){
     },500);
   }
   else{
-    backgroundImage.classList.add('project-links-displayed');
+    let listToBePrinted = listDecider(event);
+    backgroundImage.classList.add('links-displayed');
     innerContentReadyToRemove();
     setTimeout(function(){
       innerContent.innerHTML="";
-      innerContent.appendChild(projectList);
+      innerContent.appendChild(listToBePrinted);
       innerContentLinksReadyToPrint();
     },500);
   }
 }
 
+
+function listDecider(event){
+  switch (event.target.id) {
+    case 'project-button':
+      return projectList;
+      break;
+    case 'blog-link':
+      return blogList;
+      break;
+    default:
+      return projectList;
+  }
+}
 
 function innerContentLinksReadyToRemove(){
   innerContent.classList.add('animate-fade-out-links');
@@ -113,19 +140,43 @@ function fadeInAwesomeness(){
 
 function hoverOverHeaderLinks(event){
   if (justReturnedFromClick) return;
-  if(backgroundImage.classList.contains('project-links-displayed')) return;
+  if(backgroundImage.classList.contains('links-displayed')) return;
   changeLinkColours(aboutMeLink);
   changeLinkColours(extrasLink);
   changeLinkColours(quoteContainer);
+  if(event.target.id == 'project-button'){
+    changeLinkColours(blogLink);
+    changeLinkColours(resumeButton);
+  }
+  else if (event.target.id == 'blog-link'){
+    changeLinkColours(projectButton);
+    changeLinkColours(resumeButton);
+  }
+  else{
+    changeLinkColours(projectButton);
+    changeLinkColours(blogLink);
+  }
   blurBackgroundImage();
   printQuoteOnScreen(event);
 }
 
 function leaveHoverOverHeaderLinks(event){
-  if(backgroundImage.classList.contains('project-links-displayed')) return;
+  if(backgroundImage.classList.contains('links-displayed')) return;
   normalLinkColours(aboutMeLink);
   normalLinkColours(extrasLink);
   normalLinkColours(quoteContainer);
+  if(event.target.id == 'project-button'){
+    normalLinkColours(blogLink);
+    normalLinkColours(resumeButton);
+  }
+  else if (event.target.id == 'blog-link'){
+    normalLinkColours(projectButton);
+    normalLinkColours(resumeButton);
+  }
+  else{
+    normalLinkColours(projectButton);
+    normalLinkColours(blogLink);
+  }
   unblurBackgroundImage();
   innerContentReadyToRemove();
   innerContent.classList.remove('hidden-inner-content');
@@ -210,6 +261,9 @@ function hoverQuoteToBePrintedOnScreen(event){
       break;
     case "extras-link":
       return "I don't know what to put here so pretend there's something really cool here ;)";
+      break;
+    case "resume-button":
+      return "Download a pdf copy of my resume";
       break;
     default:
       return null;

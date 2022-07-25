@@ -14,9 +14,10 @@ body, html{
 }
 
 .background-image{
-  background-image: url(images/background.jpeg);
-  background-size: auto;
+  background-image: url(images/background.svg);
+  background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   height: 100%;
   width: 100%;
 }
@@ -116,7 +117,7 @@ a{
 
 .hide{
   color:transparent;
-  transition: 1s;
+  transition: 0.5s;
   cursor: default;
   pointer-events: none;
 }
@@ -124,7 +125,7 @@ a{
 .unhide{
   color: white;
   transition: 1s;
-  cursor: auto;
+  cursor: pointer;
   pointer-events: all;
 }
 
@@ -139,16 +140,12 @@ a{
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .pre-loader.hidden {
   opacity: 0;
   pointer-events: none;
 }
-
-
-
 
 .blurred-image{
   filter: blur(16px);
@@ -159,7 +156,6 @@ a{
   filter: none;
   transition: 1s;
 }
-
 
 .inner-content{
   text-align: center;
