@@ -1,6 +1,6 @@
 let projectButton = document.getElementById('project-button');
 let body = document.querySelector('body');
-let aboutMeLink = document.getElementById('about-me-link');
+//let aboutMeLink = document.getElementById('about-me-link');
 let extrasLink = document.getElementById('extras-link');
 let backgroundImage = document.querySelector('.background-image-about-me');
 let quoteContainer = document.querySelector('.quote-container');
@@ -17,12 +17,12 @@ let projectList = document.createElement('ul');
 projectList.setAttribute('style','list-style: none;');
 let routeFindingProject = document.createElement('li');
 let routeFindingProjectLink = document.createElement('a');
-routeFindingProjectLink.href = "index.html";
-routeFindingProjectLink.innerHTML = "Route Finding Project";
+routeFindingProjectLink.href = "https://gitlab.com/comp1921_2021/sc20sh";
+routeFindingProjectLink.innerHTML = "Route Finding and Virtual Library";
 routeFindingProject.appendChild(routeFindingProjectLink);
 let leedSkrrt = document.createElement('li');
 let leedSkrrtLink = document.createElement('a');
-leedSkrrtLink.href = "index.html";
+leedSkrrtLink.href = "https://gitlab.com/sc20sh/scooter-project";
 leedSkrrtLink.innerHTML="leedSkrrt";
 leedSkrrt.appendChild(leedSkrrtLink);
 appendProjectListChildren();
@@ -50,8 +50,8 @@ resumeButton.addEventListener('mouseover', hoverOverHeaderLinks);
 resumeButton.addEventListener('mouseleave', leaveHoverOverHeaderLinks);
 
 //mouse hover event listeners for bottom links
-aboutMeLink.addEventListener('mouseover',hoverOverBottomLinks);
-aboutMeLink.addEventListener('mouseleave',leaveHoverOverBottomLinks);
+//aboutMeLink.addEventListener('mouseover',hoverOverBottomLinks);
+//aboutMeLink.addEventListener('mouseleave',leaveHoverOverBottomLinks);
 extrasLink.addEventListener('mouseover',hoverOverBottomLinks);
 extrasLink.addEventListener('mouseleave',leaveHoverOverBottomLinks);
 
@@ -130,7 +130,7 @@ function innerContentLinksReadyToPrint(){
 function hoverOverHeaderLinks(event){
   if (justReturnedFromClick) return;
   if(backgroundImage.classList.contains('links-displayed')) return;
-  changeLinkColours(aboutMeLink);
+  //changeLinkColours(aboutMeLink);
   changeLinkColours(extrasLink);
   changeLinkColours(quoteContainer);
   if(event.target.id == 'project-button'){
@@ -151,7 +151,7 @@ function hoverOverHeaderLinks(event){
 
 function leaveHoverOverHeaderLinks(event){
   if(backgroundImage.classList.contains('links-displayed')) return;
-  normalLinkColours(aboutMeLink);
+  //normalLinkColours(aboutMeLink);
   normalLinkColours(extrasLink);
   normalLinkColours(quoteContainer);
   if(event.target.id == 'project-button'){
@@ -260,7 +260,7 @@ function hoverQuoteToBePrintedOnScreen(event){
       return "General information behind me and my life up until now.";
       break;
     case "extras-link":
-      return "I don't know what to put here so pretend there's something really cool here ;)";
+      return "Work in progress so pretend there's something really cool here ;)";
       break;
     case "resume-button":
       return "Download a pdf copy of my resume";
