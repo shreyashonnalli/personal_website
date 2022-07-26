@@ -10,13 +10,16 @@ body, html{
   width: 100%;
   flex-direction: column;
   margin: 0;
-  overflow: hidden;
+  margin-left: 0;
+  padding: 0;
+  padding-left:0;
+  overflow: scroll;
 }
 
 .background-image, .background-image-about-me{
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   height: 100%;
   width: 100%;
 }
@@ -125,7 +128,7 @@ a{
 }
 
 
-.project-button, .blog-link{
+.project-button, .contact-button{
   padding-right: 20px;
 }
 
@@ -182,9 +185,10 @@ button.unhide, a.unhide{
   cursor: default;
   pointer-events: none;
   width: 80%;
-  height: 60%;
+  height: 100%;
   padding-left: 10%;
   padding-right:10%;
+  overflow-y: scroll;
 }
 
 .animate-fade-out, .animate-fade-out *{
@@ -301,11 +305,12 @@ styles for the about me page
 
 .about-me-content-header{
   font-weight: bolder;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .about-me-content{
   text-align: left;
-  font-size: 16px;
-  overflow: scroll;
+  font-size: 20px;
+  max-height: calc(100% - 181px - 60px);
+  overflow-y: scroll;
 }

@@ -4,12 +4,16 @@ let aboutMeLink = document.getElementById('about-me-link');
 let extrasLink = document.getElementById('extras-link');
 let backgroundImage = document.querySelector('.background-image');
 let quoteContainer = document.querySelector('.quote-container');
-let blogLink = document.getElementById('blog-link');
+let contactButton = document.getElementById('contact-button');
 let innerContent = document.querySelector('.inner-content');
 innerContent.classList.add('hidden-inner-content');
+
+
 let preLoader = document.querySelector('.pre-loader');
 preLoader.setAttribute('style','color: transparent; text-shadow: 0 0 5px rgba(0,0,0,0);');
 window.addEventListener('load', loadPage);
+
+
 let projectList = document.createElement('ul');
 projectList.setAttribute('style','list-style: none;');
 let routeFindingProject = document.createElement('li');
@@ -23,14 +27,19 @@ leedSkrrtLink.href = "https://gitlab.com/sc20sh/scooter-project";
 leedSkrrtLink.innerHTML="leedSkrrt";
 leedSkrrt.appendChild(leedSkrrtLink);
 appendProjectListChildren();
-let blogList = document.createElement('ul');
-blogList.setAttribute('style','list-style: none;');
-let launchDay = document.createElement('li');
-let launchDayLink = document.createElement('a');
-launchDayLink.href = "index.html";
-launchDayLink.innerHTML = "Launch Day!";
-launchDay.appendChild(launchDayLink);
-appendBlogListChildren();
+let contactList = document.createElement('ul');
+contactList.setAttribute('style','list-style: none;');
+let instagram = document.createElement('li');
+let instagramLink = document.createElement('a');
+instagramLink.href = "https://instagram.com/shreyashonnalli";
+instagramLink.innerHTML = "Instagram";
+instagram.appendChild(instagramLink);
+let email = document.createElement('li');
+let emailLink = document.createElement('a');
+emailLink.href = "mailto:honnallishreyas@gmail.com";
+emailLink.innerHTML = "Gmail";
+email.appendChild(emailLink);
+appendContactListChildren();
 let resumeButton = document.getElementById('resume-button');
 let justReturnedFromClick = false;
 /*
@@ -42,9 +51,9 @@ let justReturnedFromClick = false;
 projectButton.addEventListener('mouseover', hoverOverHeaderLinks);
 projectButton.addEventListener('mouseleave', leaveHoverOverHeaderLinks);
 projectButton.addEventListener('click', toggleLinks);
-blogLink.addEventListener('mouseover',hoverOverHeaderLinks);
-blogLink.addEventListener('mouseleave',leaveHoverOverHeaderLinks);
-blogLink.addEventListener('click',toggleLinks);
+contactButton.addEventListener('mouseover',hoverOverHeaderLinks);
+contactButton.addEventListener('mouseleave',leaveHoverOverHeaderLinks);
+contactButton.addEventListener('click',toggleLinks);
 resumeButton.addEventListener('mouseover', hoverOverHeaderLinks);
 resumeButton.addEventListener('mouseleave', leaveHoverOverHeaderLinks);
 
@@ -55,8 +64,11 @@ extrasLink.addEventListener('mouseover',hoverOverBottomLinks);
 extrasLink.addEventListener('mouseleave',leaveHoverOverBottomLinks);
 
 
-function appendBlogListChildren(){
-  blogList.appendChild(launchDay);
+
+
+function appendContactListChildren(){
+  contactList.appendChild(instagram);
+  contactList.appendChild(email);
 }
 
 function appendProjectListChildren(){
@@ -65,7 +77,7 @@ function appendProjectListChildren(){
 }
 
 
-function displayBlogLinks(){
+function displayContactLinks(){
   innerContentReadyToRemove();
   setTimeout(function(){innerContentReadyToPrint();},1000);
 }
@@ -104,8 +116,8 @@ function listDecider(event){
     case 'project-button':
       return projectList;
       break;
-    case 'blog-link':
-      return blogList;
+    case 'contact-button':
+      return contactList;
       break;
     default:
       return projectList;
@@ -145,16 +157,16 @@ function hoverOverHeaderLinks(event){
   changeLinkColours(extrasLink);
   changeLinkColours(quoteContainer);
   if(event.target.id == 'project-button'){
-    changeLinkColours(blogLink);
+    changeLinkColours(contactButton);
     changeLinkColours(resumeButton);
   }
-  else if (event.target.id == 'blog-link'){
+  else if (event.target.id == 'contact-button'){
     changeLinkColours(projectButton);
     changeLinkColours(resumeButton);
   }
   else{
     changeLinkColours(projectButton);
-    changeLinkColours(blogLink);
+    changeLinkColours(contactButton);
   }
   blurBackgroundImage();
   printQuoteOnScreen(event);
@@ -166,16 +178,16 @@ function leaveHoverOverHeaderLinks(event){
   normalLinkColours(extrasLink);
   normalLinkColours(quoteContainer);
   if(event.target.id == 'project-button'){
-    normalLinkColours(blogLink);
+    normalLinkColours(contactButton);
     normalLinkColours(resumeButton);
   }
-  else if (event.target.id == 'blog-link'){
+  else if (event.target.id == 'contact-button'){
     normalLinkColours(projectButton);
     normalLinkColours(resumeButton);
   }
   else{
     normalLinkColours(projectButton);
-    normalLinkColours(blogLink);
+    normalLinkColours(contactButton);
   }
   unblurBackgroundImage();
   innerContentReadyToRemove();
@@ -253,8 +265,8 @@ function hoverQuoteToBePrintedOnScreen(event){
     case "project-button":
       return "A comprehensive list of links to repositories of previous projects.";
       break;
-    case "blog-link":
-      return "A blog of my recent events in my life in and outside of software.";
+    case "contact-button":
+      return "Contact Me through these links!";
       break;
     case "about-me-link":
       return "General information behind me and my life up until now.";
@@ -263,7 +275,7 @@ function hoverQuoteToBePrintedOnScreen(event){
       return "Work in progress so pretend there's something really cool here ;)";
       break;
     case "resume-button":
-      return "Download a pdf copy of my resume";
+      return "View a pdf copy of my resume";
       break;
     default:
       return null;

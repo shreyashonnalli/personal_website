@@ -4,14 +4,20 @@ let body = document.querySelector('body');
 let extrasLink = document.getElementById('extras-link');
 let backgroundImage = document.querySelector('.background-image-about-me');
 let quoteContainer = document.querySelector('.quote-container');
-let blogLink = document.getElementById('blog-link');
+let contactButton = document.getElementById('contact-button');
 let innerContent = document.querySelector('.inner-content');
 //innerContent.classList.add('hidden-inner-content');
 innerContent.classList.add('about-me-content');
 let innerContentContent = document.createElement('p');
 innerContentContent.textContent = "I am shreyas, a 20 year old student of Computer Science and Artificial Intelligence at University of Leeds. My areas of interest in programming are Artificial Intelligence, Augmented Reality and Computer Graphics, and creating polished User Interfaces for smooth user experiences. I have created various projects in the past, one of them being this website itself! The biggest project I have undertaken so far is a commercial booking system of scooters across leeds(leedSkrrt). You can find more descriptive explanations of each project in the projects section. Outside of coding, my major interests include playing cricket, being a fitness freak and the financial world.";
-innerContent.appendChild(innerContentContent);
+setTimeout(function(){
+  innerContent.appendChild(innerContentContent);
+},1500);
 
+
+let preLoader = document.querySelector('.pre-loader');
+preLoader.setAttribute('style','color: transparent; text-shadow: 0 0 5px rgba(0,0,0,0);');
+window.addEventListener('load', loadPage);
 
 let projectList = document.createElement('ul');
 projectList.setAttribute('style','list-style: none;');
@@ -26,14 +32,19 @@ leedSkrrtLink.href = "https://gitlab.com/sc20sh/scooter-project";
 leedSkrrtLink.innerHTML="leedSkrrt";
 leedSkrrt.appendChild(leedSkrrtLink);
 appendProjectListChildren();
-let blogList = document.createElement('ul');
-blogList.setAttribute('style','list-style: none;');
-let launchDay = document.createElement('li');
-let launchDayLink = document.createElement('a');
-launchDayLink.href = "index.html";
-launchDayLink.innerHTML = "Launch Day!";
-launchDay.appendChild(launchDayLink);
-appendBlogListChildren();
+let contactList = document.createElement('ul');
+contactList.setAttribute('style','list-style: none;');
+let instagram = document.createElement('li');
+let instagramLink = document.createElement('a');
+instagramLink.href = "https://instagram.com/shreyashonnalli";
+instagramLink.innerHTML = "Instagram";
+instagram.appendChild(instagramLink);
+let email = document.createElement('li');
+let emailLink = document.createElement('a');
+emailLink.href = "mailto:honnallishreyas@gmail.com";
+emailLink.innerHTML = "Gmail";
+email.appendChild(emailLink);
+appendContactListChildren();
 let resumeButton = document.getElementById('resume-button');
 let justReturnedFromClick = false;
 
@@ -43,9 +54,9 @@ let justReturnedFromClick = false;
 projectButton.addEventListener('mouseover', hoverOverHeaderLinks);
 projectButton.addEventListener('mouseleave', leaveHoverOverHeaderLinks);
 projectButton.addEventListener('click', toggleLinks);
-blogLink.addEventListener('mouseover',hoverOverHeaderLinks);
-blogLink.addEventListener('mouseleave',leaveHoverOverHeaderLinks);
-blogLink.addEventListener('click',toggleLinks);
+contactButton.addEventListener('mouseover',hoverOverHeaderLinks);
+contactButton.addEventListener('mouseleave',leaveHoverOverHeaderLinks);
+contactButton.addEventListener('click',toggleLinks);
 resumeButton.addEventListener('mouseover', hoverOverHeaderLinks);
 resumeButton.addEventListener('mouseleave', leaveHoverOverHeaderLinks);
 
@@ -57,9 +68,25 @@ extrasLink.addEventListener('mouseleave',leaveHoverOverBottomLinks);
 
 
 
+function loadPage(){
+  fadeInAboutMe();
+  setTimeout(function(){fadeOutPreLoader();},1000);
+}
 
-function appendBlogListChildren(){
-  blogList.appendChild(launchDay);
+
+function fadeOutPreLoader(){
+  preLoader.className += " hidden";
+}
+
+
+function fadeInAboutMe(){
+  preLoader.setAttribute('style','text-align: center; color: black; filter: none; transition: 1s;');
+}
+
+
+function appendContactListChildren(){
+  contactList.appendChild(instagram);
+  contactList.appendChild(email);
 }
 
 function appendProjectListChildren(){
@@ -68,7 +95,7 @@ function appendProjectListChildren(){
 }
 
 
-function displayBlogLinks(){
+function displayContactLinks(){
   innerContentReadyToRemove();
   setTimeout(function(){innerContentReadyToPrint();},1000);
 }
@@ -107,8 +134,8 @@ function listDecider(event){
     case 'project-button':
       return projectList;
       break;
-    case 'blog-link':
-      return blogList;
+    case 'contact-button':
+      return contactList;
       break;
     default:
       return projectList;
@@ -134,16 +161,16 @@ function hoverOverHeaderLinks(event){
   changeLinkColours(extrasLink);
   changeLinkColours(quoteContainer);
   if(event.target.id == 'project-button'){
-    changeLinkColours(blogLink);
+    changeLinkColours(contactButton);
     changeLinkColours(resumeButton);
   }
-  else if (event.target.id == 'blog-link'){
+  else if (event.target.id == 'contact-button'){
     changeLinkColours(projectButton);
     changeLinkColours(resumeButton);
   }
   else{
     changeLinkColours(projectButton);
-    changeLinkColours(blogLink);
+    changeLinkColours(contactButton);
   }
   blurBackgroundImage();
   printQuoteOnScreen(event);
@@ -155,16 +182,16 @@ function leaveHoverOverHeaderLinks(event){
   normalLinkColours(extrasLink);
   normalLinkColours(quoteContainer);
   if(event.target.id == 'project-button'){
-    normalLinkColours(blogLink);
+    normalLinkColours(contactButton);
     normalLinkColours(resumeButton);
   }
-  else if (event.target.id == 'blog-link'){
+  else if (event.target.id == 'contact-button'){
     normalLinkColours(projectButton);
     normalLinkColours(resumeButton);
   }
   else{
     normalLinkColours(projectButton);
-    normalLinkColours(blogLink);
+    normalLinkColours(contactButton);
   }
   unblurBackgroundImage();
   innerContentReadyToRemove();
@@ -253,8 +280,8 @@ function hoverQuoteToBePrintedOnScreen(event){
     case "project-button":
       return "A comprehensive list of links to repositories of previous projects.";
       break;
-    case "blog-link":
-      return "A blog of my recent events in my life in and outside of software.";
+    case "contact-button":
+      return "Contact me through these links!";
       break;
     case "about-me-link":
       return "General information behind me and my life up until now.";
@@ -263,7 +290,7 @@ function hoverQuoteToBePrintedOnScreen(event){
       return "Work in progress so pretend there's something really cool here ;)";
       break;
     case "resume-button":
-      return "Download a pdf copy of my resume";
+      return "View a pdf copy of my resume";
       break;
     default:
       return null;
